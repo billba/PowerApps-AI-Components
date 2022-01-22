@@ -2,43 +2,42 @@
 
 <img src="./BoundingBoxes.png" height="300" alt="Bounding boxes"/><img src="./ImageConfidencePill.png" height="300" alt="Image classification confidence pill"/><br/><img src="./TextClassification.png" height="150" alt="Text classification confidence pill"/><img src="./ConfidenceGallery.png" height="150" alt="Image classification confidence gallery"/>
 
-
-Sample custom components that demonstrate how to visualize results from AI models in Power Apps via AI Builder and Power Fx. Not officially supported by Microsoft.
+Sample custom components that demonstrate how to visualize results from AI models in Power Apps via AI Builder and Power Fx. Open sourced under [MIT License](./LICENSE). Not officially supported by Microsoft.
 
 ## Table of Contents
 
-1. [What you'll need](#what-youll-need)
-2. [Getting started](#getting-started)
-3. [The Confidence Pill component](#the-confidence-pill-component)
-4. [The Confidence Gallery component](#the-confidence-gallery-component)
-5. [The Bounding Boxes component](#bounding-boxes)
-6. [Using the camera](#using-the-camera)
-7. [Building your own custom components](#building-your-own-custom-components)
-8. [Stay in touch](#stay-in-touch)
+### [What you'll need](#what-youll-need)
+### [Getting started](#getting-started)
+### [The Confidence Pill component](#the-confidence-pill-component)
+### [The Confidence Gallery component](#the-confidence-gallery-component)
+### [The Bounding Boxes component](#bounding-boxes)
+### [Using the camera](#using-the-camera)
+### [Building your own custom components](#building-your-own-custom-components)
+### [Stay in touch](#stay-in-touch)
 
 ## What you'll need
 
-1. A **Power Apps license** -- you may already have one for your company, and if not you can get one for free. Start [here](https://powerapps.microsoft.com/developerplan/).
-2. **Chrome or Edge**. While Power Apps can be run on a broad range of browsers (not to mention iOS, Android, and Windows apps) building them requires [Chrome](https://www.google.com/chrome/) or [Edge](https://www.microsoft.com/edge).
-3. If you want to try these components with computer vision models you'll need, well, **computer vision models**. You can build [object detection](https://docs.microsoft.com/en-us/ai-builder/get-started-with-object-detection) models in AI Builder (which is part of Power Apps) and [image classification](https://www.lobe.ai/docs/welcome/welcome) models in [Lobe](https://lobe.ai) (a Windows and Mac app from Microsoft which is free to download and use), or someone in your organization may already have built some and made them available to you.
-4. AI is a premium feature of Power Apps and many (but not all) AI features require **AI credits**. Most Power Apps licenses include starter capacity of AI credits for exactly this kind of experimentation. You may also qualify for a free 30-day trial. And certain model types (including, currently, image classification) are free to use.
+* A **Power Apps license** -- you may already have one via your organization, and if not you can get one for free [here](https://powerapps.microsoft.com/developerplan/).
+* **Chrome or Edge**. While Power Apps can be run on a broad range of browsers (not to mention iOS, Android, and Windows apps) building them requires [Chrome](https://www.google.com/chrome/) or [Edge](https://www.microsoft.com/edge).
+* If you want to try these components with computer vision models you'll need, well, **computer vision models**. You can build [object detection](https://docs.microsoft.com/en-us/ai-builder/get-started-with-object-detection) models in AI Builder (which is part of Power Apps) and [image classification](https://www.lobe.ai/docs/welcome/welcome) models in [Lobe](https://lobe.ai) (a Windows and Mac app from Microsoft which is free to download and use), or someone in your organization may already have built some and made them available to you.
+* AI is a premium feature of Power Apps and many (but not all) AI features require **AI credits**. Most Power Apps licenses include starter capacity of AI credits for exactly this kind of experimentation. You may also qualify for a free 30-day trial. And certain model types (including, currently, image classification) are free to use.
 
 ## Getting started
 
-1. Download `AI-Components.msapp` from this repo by right clicking [here](./AI-Components.msapp) and selecting "Download"
-2. Add one or more AI models into your Power App using the Data pane. The "AI models" section will show all models that you have access to, including a variety of prebuilt models.
-<br><img src="./AddModel.png" height="300" alt="Add Model"/>
-3. Import the AI-components.msapp into your Power App using the Insert/Custom menu
+1. Download `AI-Components.msapp` from this repo by going [here](./AI-Components.msapp) and selecting "Download"
+2. Edit or create a Power App and import the `AI-Components.msapp` file you just downloaded into your Power App using the `Insert`/`Custom` menu
 <br><img src="./ImportComponent.png" height="150" alt="Import Component"/>
-4. Add one or more of the components to your app using the Insert pane
+3. Add one or more AI models into your Power App using the `Data` pane. The `AI models` section will show all the models that you have access to, including a variety of prebuilt models.
+<br><img src="./AddModel.png" height="300" alt="Add Model"/>
+4. Add one or more of the components to your app using the `Insert` pane
 <br><img src="./InsertComponent.png" height="175" alt="InsertComponent"/>
-5. Set the properties of each component as detailed below
+5. Configure your components as detailed below
 
 ## The *Confidence Pill* component
 
 A number of AI model types return a class and a confidence. You could just show this as text, e.g. `Duck (85%)` but Lobe adopts a more intuitive visual approach that we can leverage in Power Apps.
 
-Add the `Confidence Pill` component as shown in step 4 above. You should see something like this:
+Add the `Confidence Pill` component as shown in [step 4 above](#getting-started). You should see something like this:
 
 <img src="./InsertConfidencePill.png" height="100" alt="Insert confidence pill"/>
 
@@ -50,7 +49,7 @@ As you may have noticed, nothing about this components cries out "Artificial Int
 
 But sometimes the AI models are run in the app itself, and it's easy to hook up this components to make this happen. Let's try this out.
 
-We'll start with some text classification. You'll need to add a text classification model as shown in step 2 above. AI Builder conveniently provides a prebuilt model called `Category classification`.
+We'll start with some *text classification*. You'll need to add a text classification model as shown in [step 3 above](#getting-started). AI Builder conveniently provides a prebuilt model called `Category classification`.
 
 Now add a `Text Input` control called `TextInput1`, and set its `OnChange` property to `Set(textClasses, 'Category classification'.Predict("en", TextInput1.Text).results)` (feel free change `"en"` to your language of choice). Every time a user updates the text your app will run the model against the text and store the results in a global variable called `textClasses`.
 
@@ -58,9 +57,9 @@ Now set the `Class` of your confidence pill component to `{Label: First(textClas
 
 <img src="./TextClassification.png" height="150" alt="Text Classification"/>
 
-Now let's try this component with image classification. AI Builder doesn't currently provide a prebuilt image classification model, so you'll have to build your own using [Lobe](https://lobe.ai) or hope someone in your organization has already built one that you can use. My family has one dog and nine ducks and so I created a model called `Dog vs Duck`.
+Now let's try this component with *image classification*. AI Builder doesn't currently provide a prebuilt image classification model, so you'll have to build your own using [Lobe](https://lobe.ai) or hope someone in your organization has already built one that you can use. My family has one dog and nine ducks and so I created a model called `Dog vs Duck`.
 
-Add your model as shown in step 2 above, and then add an `Image` control called `ClassImage1`. Set its `Image` property to an image file that is relevant to your model. I used a picture of our dog Grover.
+Add your model as shown in [step 3 above](#getting-started), and then add an `Image` control called `ClassImage1`. Set its `Image` property to an image file that is relevant to your model. I used a picture of our dog Grover.
 
 Now add a second `Confidence Pill` component (be a little fancy like Lobe and position it over the bottom left of your image). Set its `Class` property to `First('Dog vs Duck'.Predict(ClassImage1.Image).Labels)`, using your model name instead. Et voila!
 
@@ -70,15 +69,15 @@ The confidence pill will update whenever the image changes.
 
 ##  The *Confidence Gallery* component
 
-The `Confidence Gallary` component is similar to the confidence pill but it shows multiple results. This can be helpful in communicating to users that AI models are ultimately just making an educated guess, and are particularly valuable for models where the confidence value of the first few results could be similar.
+The `Confidence Gallary` component is similar to the confidence pill but it shows multiple results. This can be helpful in communicating to users that AI models are ultimately just making an educated guess, and is particularly valuable for models where the confidence value of the first few results could be similar.
 
-Add a `Confidence Gallery` component. 
+Add a `Confidence Gallery` component.
 
 <img src="./InsertConfidenceGallery.png" height="100" alt="Insert confidence gallery"/>
 
-The `Classes` property is similar to the `Class` property of the confidence pill, but instead of a single record we provide a table of records. Try adding and subtracting records to the table to see what happens. By convention the confidences are in descending order and add up to 1 but that is not enforced.
+The `Classes` property is similar to the `Class` property of the confidence pill, but instead of a single record we provide a table of records. Try adding and subtracting records to the table to see what happens. By convention the confidences are in descending order and add up to 1 but neither is enforced by this component.
 
-This component has similar properties as the confidence pill. All the color and fill properties expect CSS color values.
+This component has similar properties as the confidence pill. All the *color* and *fill* properties expect CSS color values.
 
 Now set its `Class` property to `'Dog vs Duck'.Predict(ClassImage1.Image).Labels`, using your model name instead. You can see that, to my model, Grover could be mistaken for a duck in the right light (please don't tell him).
 
@@ -90,9 +89,9 @@ In theory this component could also be used for text classification models. Unfo
 
 ## The *Bounding Boxes* component
 
-A different flavor of computer vision can detect multiple objects within an image, each with a label and bounding box. For instance you could identify both a dog and a duck in a photo (though it would have to be a better-behaved dog than Grover) or multiple ducks. This calls for a different visualization.
+A different flavor of computer vision called *object detection* can detect multiple objects within an image, each with a label and bounding box. For instance you could identify both a dog and a duck in a photo or multiple ducks. This calls for a different visualization.
 
-First add a new `Image` called `DetectImage1`, set it to the image of your choice, and resize it so that it is the exact size and shape of the image. Then add a `Bounding Boxes` component and position it so that it exactly overlays the image.
+First add a new `Image` called `DetectImage1`, set its `Image` property to the image of your choice, and resize it so that its outline is the exact size and shape of your image. Then add a `Bounding Boxes` component and position it so that it exactly overlays the image.
 
 <img src="./InsertBoundingBoxes.png" height="200" alt="Insert bounding boxes"/>
 
@@ -106,7 +105,7 @@ There are also several other properties that let you adjust how the component is
 
 Now let's try this component with AI. AI Builder doesn't currently provide a prebuilt object detection model, so you'll have to build your own using AI Builder or hope someone in your organization has already built one that you can use. Using the same dataset I used for my `Dogs vs Ducks` image classification model in Lobe, I created an object detection model called `Dogs and Ducks` in AI Builder.
 
-Add your model as shown in step 2 above, then set the `Objects` property of your bounding boxes component to `'Dogs and Ducks'.Predict(DetectImage1.Image).results`, using your model name instead. 
+Add your model as shown in [step] 2 above]](#getting-started), then set the `Objects` property of your bounding boxes component to `'Dogs and Ducks'.Predict(DetectImage1.Image).results`, using your model name instead. 
 
 <img src="./BoundingBoxes.png" height="200" alt="Bounding boxes"/>
 
@@ -120,14 +119,16 @@ Add a `Camera` control and set its `OnSelect` property to `Set(frame, Self.Photo
 
 Another way to use the camera control is to regularly stream images from the camera. **Be aware that if you adopt this approach you may run through AI credits at an accelerated rate.** First, set the `Stream rate` of your camera control to `5000`. This value is in milliseconds, which means you will get a new image every 5 seconds. You can adjust this up or down, but vision AI models can take a few seconds to run, so there is a limit to how frequently you can usefully update the image. Next, set the `OnStream` property to `Set(frame, Self.Photo)`. You should see your image control(s) update at the rate you set, and the component will update after that. **Again, be aware that you may be charged AI credits for each image run through the AI model** so you will probably want to add application logic to turn the streaming on and off, especially when developing your app.
 
-These two methods can be used separately or together. For instance you can automatically stream a new image every minute, but also let the user click on the camera whenever they see something interesting.
+Another approach to streaming would be to place your classification or bounding boxes component directly over the camera itself. This is more space-efficient but you run the risk of confusing or misleading users because the results of the AI model will often lag behind what the camera is currently showing. This is why I prefer the live camera + captured image pattern.
+
+Selection and streaming can be used separately or together. For instance you can automatically stream a new image every minute, but also let the user click on the camera whenever they see something interesting.
 
 ## Building your own custom components
 
-Feel free to use any or all of these components in your apps, with the understanding that they are not officially supported by Microsoft. You can also modify them as you see fit, or create your own and redistribute them as you see fit.
+Feel free to use any or all of these components in your apps, with the understanding that they are not officially supported by Microsoft. You can also modify and/or redistribute them as you see fit, subject to the [MIT license](./LICENSE). Finally, I strongly encourage you to build your own components using these as inspiration. If you do, I further encourage you to share them with the Power Apps community on GitHub!
 
-If you look into how these components were implemented you will see that they rely heavily on the Power Apps `HtmlText` control. That's because each uses features of HTML and CSS that Power Apps controls do not natively support, such as rounded rectangles. They programatically generate HTML code using the `Concat` and `Concatenate` Power Fx functions, among others.
+Power Apps lets you examine custom components to see how they were implemented. You will see that these rely heavily on the `HTML Text` control. That's because each uses CSS features that Power Apps controls do not natively support, such as rounded rectangles. The `HtmlText` property programatically generates HTML code using the `Concat` and `Concatenate` Power Fx functions, among others. Going from Power Apps data structures to HTML is imperfect, which is why most colors are specified using CSS color values rather than native Power Apps colors.
 
 ## Stay in touch
 
-Please [email me](mailto:billba@microsoft.com) to let me know if these components meet your needs or not. The Power Apps team would love to know what you're doing (or would like to do) with AI, and what new capabilities would make your goals easier to achieve!
+Please file an issue or [email me](mailto:billba@microsoft.com) to let me know if these components meet your needs or not. The Power Apps team would love to know what you're doing (or would like to do) with AI, and what new capabilities would make your goals easier to achieve!
