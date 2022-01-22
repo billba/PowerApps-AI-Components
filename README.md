@@ -131,4 +131,4 @@ Power Apps lets you examine custom components to see how they were implemented. 
 
 ## Stay in touch
 
-Please file an issue or [email me](mailto:billba@microsoft.com) to let me know if these components meet your needs or not. The Power Apps team would love to know what you're doing (or would like to do) with AI, and what new capabilities would make your goals easier to achieve!
+Please file an [issue](./issues) if you have questions or requests, or [email me](mailto:billba@microsoft.com) to let me know if these components meet your needs or not. The Power Apps team would love to know what you're doing (or would like to do) with AI, and what new capabilities would make your goals easier to achieve!
