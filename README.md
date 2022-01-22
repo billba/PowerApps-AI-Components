@@ -1,6 +1,6 @@
 # Custom AI Components for Power Apps
 
-<img src="./BoundingBoxes.png" height="300" alt="Bounding boxes"/><img src="./ImageConfidencePill.png" height="300" alt="Image classification confidence pill"/><br/><img src="./TextClassification.png" height="150" alt="Text classification confidence pill"/><img src="./ConfidenceGallery.png" height="150" alt="Image classification confidence gallery"/>
+<img src="./media/BoundingBoxes.png" height="300" alt="Bounding boxes"/><img src="./media/ImageConfidencePill.png" height="300" alt="Image classification confidence pill"/><br/><img src="./media/TextClassification.png" height="150" alt="Text classification confidence pill"/><img src="./media/ConfidenceGallery.png" height="150" alt="Image classification confidence gallery"/>
 
 Sample custom components that demonstrate how to visualize results from AI models in Power Apps via AI Builder and Power Fx. Open sourced under [MIT License](./LICENSE). Not officially supported by Microsoft.
 
@@ -26,11 +26,11 @@ Sample custom components that demonstrate how to visualize results from AI model
 
 1. Download `AI-Components.msapp` from this repo by going [here](./AI-Components.msapp) and selecting "Download"
 2. Edit or create a Power App and import the `AI-Components.msapp` file you just downloaded into your Power App using the `Insert`/`Custom` menu
-<br><img src="./ImportComponent.png" height="150" alt="Import Component"/>
+<br><img src="./media/ImportComponent.png" height="150" alt="Import Component"/>
 3. Add one or more AI models into your Power App using the `Data` pane. The `AI models` section will show all the models that you have access to, including a variety of prebuilt models.
-<br><img src="./AddModel.png" height="300" alt="Add Model"/>
+<br><img src="./media/AddModel.png" height="300" alt="Add Model"/>
 4. Add one or more of the components to your app using the `Insert` pane
-<br><img src="./InsertComponent.png" height="175" alt="InsertComponent"/>
+<br><img src="./media/InsertComponent.png" height="175" alt="InsertComponent"/>
 5. Configure your components as detailed below
 
 ## The *Confidence Pill* component
@@ -39,7 +39,7 @@ A number of AI model types return a class and a confidence. You could just show 
 
 Add the `Confidence Pill` component as shown in [step 4 above](#getting-started). You should see something like this:
 
-<img src="./InsertConfidencePill.png" height="100" alt="Insert confidence pill"/>
+<img src="./media/InsertConfidencePill.png" height="100" alt="Insert confidence pill"/>
 
 The `Class` property is a record containing the class name and confidence to display. The default value of `{Label: "Gadget", Confidence: .75}` is a great way to experiment with the display options. Try changing the `Label` and the `Confidence` fields to get a feel for how the display logic works.
 
@@ -55,7 +55,7 @@ Now add a `Text Input` control called `TextInput1`, and set its `OnChange` prope
 
 Now set the `Class` of your confidence pill component to `{Label: First(textClasses.type).type, Confidence: First(textClasses.score).score}`. This expression maps the top values from the `type` and `score` fields of `textClasses` to the `Class` and `Confidence` fields this component is expecting.
 
-<img src="./TextClassification.png" height="150" alt="Text Classification"/>
+<img src="./media/TextClassification.png" height="150" alt="Text Classification"/>
 
 Now let's try this component with *image classification*. AI Builder doesn't currently provide a prebuilt image classification model, so you'll have to build your own using [Lobe](https://lobe.ai) or hope someone in your organization has already built one that you can use. My family has one dog and nine ducks and so I created a model called `Dog vs Duck`.
 
@@ -63,7 +63,7 @@ Add your model as shown in [step 3 above](#getting-started), and then add an `Im
 
 Now add a second `Confidence Pill` component (be a little fancy like Lobe and position it over the bottom left of your image). Set its `Class` property to `First('Dog vs Duck'.Predict(ClassImage1.Image).Labels)`, using your model name instead. Et voila!
 
-<img src="./ImageConfidencePill.png" height="300" alt="Image classification confidence pill"/>
+<img src="./media/ImageConfidencePill.png" height="300" alt="Image classification confidence pill"/>
 
 The confidence pill will update whenever the image changes.
 
@@ -73,7 +73,7 @@ The `Confidence Gallary` component is similar to the confidence pill but it show
 
 Add a `Confidence Gallery` component.
 
-<img src="./InsertConfidenceGallery.png" height="100" alt="Insert confidence gallery"/>
+<img src="./media/InsertConfidenceGallery.png" height="100" alt="Insert confidence gallery"/>
 
 The `Classes` property is similar to the `Class` property of the confidence pill, but instead of a single record we provide a table of records. Try adding and subtracting records to the table to see what happens. By convention the confidences are in descending order and add up to 1 but neither is enforced by this component.
 
@@ -81,7 +81,7 @@ This component has similar properties as the confidence pill. All the *color* an
 
 Now set its `Class` property to `'Dog vs Duck'.Predict(ClassImage1.Image).Labels`, using your model name instead. You can see that, to my model, Grover could be mistaken for a duck in the right light (please don't tell him).
 
-<img src="./ConfidenceGallery.png" height="150" alt="Image classification confidence gallery"/>
+<img src="./media/ConfidenceGallery.png" height="150" alt="Image classification confidence gallery"/>
 
 The confidence gallery will update whenever the image changes.
 
@@ -93,7 +93,7 @@ A different flavor of computer vision called *object detection* can detect multi
 
 First add a new `Image` called `DetectImage1`, set its `Image` property to the image of your choice, and resize it so that its outline is the exact size and shape of your image. Then add a `Bounding Boxes` component and position it so that it exactly overlays the image.
 
-<img src="./InsertBoundingBoxes.png" height="200" alt="Insert bounding boxes"/>
+<img src="./media/InsertBoundingBoxes.png" height="200" alt="Insert bounding boxes"/>
 
 The `Objects` property takes a table of records, each with a `tagName`, `tagId` (an identifier for each object, currently ignored by this component), and `boundingBox`, itself a record consisting of `top`, `left`, `height`, and `width`, each a value between 0 and 1. Try changing the tag name and dimensions for each object to match the objects in your image, adding or subtracting objects as necessary.
 
@@ -107,7 +107,7 @@ Now let's try this component with AI. AI Builder doesn't currently provide a pre
 
 Add your model as shown in [step] 2 above]](#getting-started), then set the `Objects` property of your bounding boxes component to `'Dogs and Ducks'.Predict(DetectImage1.Image).results`, using your model name instead. 
 
-<img src="./BoundingBoxes.png" height="200" alt="Bounding boxes"/>
+<img src="./media/BoundingBoxes.png" height="200" alt="Bounding boxes"/>
 
 The bounding boxes will update whenever the image changes.
 
