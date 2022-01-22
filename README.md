@@ -1,10 +1,6 @@
 # Custom AI Components for Power Apps
 
-<img src="./BoundingBoxes.png" height="300" alt="Bounding boxes"/>
-<img src="./ImageConfidencePill.png" height="300" alt="Image classification confidence pill"/>
-<br/>
-<img src="./TextClassification.png" height="150" alt="Text classification confidence pill"/>
-<img src="./ConfidenceGallery.png" height="150" alt="Image classification confidence gallery"/>
+<img src="./BoundingBoxes.png" height="300" alt="Bounding boxes"/><img src="./ImageConfidencePill.png" height="300" alt="Image classification confidence pill"/><br/><img src="./TextClassification.png" height="150" alt="Text classification confidence pill"/><img src="./ConfidenceGallery.png" height="150" alt="Image classification confidence gallery"/>
 
 
 Sample custom components that demonstrate how to visualize results from AI models in Power Apps via AI Builder and Power Fx. Not officially supported by Microsoft.
