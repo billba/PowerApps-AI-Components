@@ -85,7 +85,14 @@ Now set its `Class` property to `'Dog vs Duck'.Predict(ClassImage1.Image).Labels
 
 The confidence gallery will update whenever the image changes.
 
-In theory this component could also be used for text classification models. Unfortunately at present the output of AI Builder text classification models is in a different enough format that the same component can't easily be made to work with both. Adapting the confidence gallery for text classification models is an exercise left for the reader.
+The confidence gallery could potentially also be used with text classification models. For this example it's a moot point as the category classification model currently only returns one class. For completion's sake, if it did return more than one, here is the relevant code for the `Class` property. The output of AI Builder text classification models is currently structured quite differently from that of image classification, so we have to engage in some fairly verbose data transformation:
+
+```
+ForAll(Sequence(CountA(textClasses.type)), {
+    Label: Last(FirstN(textClasses.type, Value)).type,
+    Confidence: Last(FirstN(textClasses.score, Value)).score
+})
+```
 
 ## The *Bounding Boxes* component
 
