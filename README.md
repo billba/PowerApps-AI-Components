@@ -43,7 +43,7 @@ Add the `Confidence Pill` component as shown in [step 4 above](#getting-started)
 
 The `Class` property is a record containing the class name and confidence to display. The default value of `{Label: "Gadget", Confidence: .75}` is a great way to experiment with the display options. Try changing the `Label` and the `Confidence` fields to get a feel for how the display logic works.
 
-You can move and resize the component however you like. There are properties for the font, text color, pill colors, pill radius, and text padding (which allows you to fine tune the relationship between the font and the calculated pill width) properties, but if you're happy with the defaults you can leave them alone. Note that the `PillFill` and `ConfidenceFill` values are expecting CSS color values such as `"#67D0AE"` and `"DimGray"`.
+You can move and resize the component however you like. There are properties for the font, text color, pill colors, pill radius, and text padding (which allows you to fine tune the relationship between the font and the calculated text width) properties, but if you're happy with the defaults you can leave them alone. Note that the `PillFill` and `ConfidenceFill` values are expecting CSS color values such as `"#67D0AE"` or `"DimGray"`.
 
 As you may have noticed, nothing about this components cries out "Artificial Intelligence". In fact it is intentionally very *un*intelligent, and only know how to render the data you pass in. This can be very useful! Perhaps you have built a workflow using Power Automate that runs every time a user posts to a Teams channel, or adds an image to a SharePoint site, which runs an AI model and stores the results in a database. In this case your Power App only needs to show those results.
 
@@ -69,13 +69,13 @@ The confidence pill will update whenever the image changes.
 
 ##  The *Confidence Gallery* component
 
-The `Confidence Gallary` component is similar to the confidence pill but it shows multiple results. This can be helpful in communicating to users that AI models are ultimately just making an educated guess, and is particularly valuable for models where the confidence value of the first few results could be similar.
+The `Confidence Gallery` component is similar to the confidence pill, but it can show multiple classes. This can be helpful in communicating to users that AI models are ultimately just making an educated guess, and is particularly appropriate for models where the confidence value of the first few results might be similar, and so only showing the first could be misleading. The design for this component is drawn from Lobe's [iOS](https://github.com/lobe/iOS-bootstrap) and [Android](https://github.com/lobe/android-bootstrap) starter apps. 
 
-Add a `Confidence Gallery` component.
+Begin by adding a `Confidence Gallery` component.
 
 <img src="./media/InsertConfidenceGallery.png" height="100" alt="Insert confidence gallery"/>
 
-The `Classes` property is similar to the `Class` property of the confidence pill, but instead of a single record we provide a table of records. Try adding and subtracting records to the table to see what happens. By convention the confidences are in descending order and add up to 1 but neither is enforced by this component.
+The `Classes` property is similar to the `Class` property of the confidence pill, but instead of a single record we provide a table of records. Try adding and subtracting records to the table to see what happens. By convention the confidences are in descending order and add up to 1 but neither is enforced by this component. Classes will be displayed in the order given.
 
 This component has similar properties as the confidence pill. All the *color* and *fill* properties expect CSS color values.
 
@@ -122,7 +122,7 @@ The bounding boxes will update whenever the image changes.
 
 Images can come from databases or user uploads, but Power Apps also lets you access your device's camera, letting you classify or detect objects around you.
 
-Add a `Camera` control and set its `OnSelect` property to `Set(frame, Self.Photo)`. Now in one or both of your images set the `Image` property to `frame`. Whenever you click on the camera (alt-click while you're in Studio) the image will be updated to what the camera was showing in that moment, and after the AI model runs your custom components will update with its results.
+Add a `Camera` control and set its `OnSelect` property to `Set(frame, Self.Photo)`. Now in one or both of your images set the `Image` property to `frame`. Whenever you click on the camera (alt-click while you're in Studio) the image will be updated to what the camera was showing in that moment, and after the AI model runs your custom component(s) will update.
 
 Another way to use the camera control is to regularly stream images from the camera. **Be aware that if you adopt this approach you may run through AI credits at an accelerated rate.** First, set the `Stream rate` of your camera control to `5000`. This value is in milliseconds, which means you will get a new image every 5 seconds. You can adjust this up or down, but vision AI models can take a few seconds to run, so there is a limit to how frequently you can usefully update the image. Next, set the `OnStream` property to `Set(frame, Self.Stream)`. You should see your image control(s) update at the rate you set, and the component will update after that. **Again, be aware that you may be charged AI credits for each image run through the AI model** so you will probably want to add application logic to turn the streaming on and off, especially when developing your app.
 
