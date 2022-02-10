@@ -114,7 +114,7 @@ Now let's try this component with AI. AI Builder doesn't currently provide a pre
 
 Add your model as shown in [step] 2 above]](#getting-started), then set the `Objects` property of your bounding boxes component to `'Dogs and Ducks'.Predict(DetectImage1.Image).results`, using your model name instead. 
 
-<img src="./media/BoundingBoxes.png" height="200" alt="Bounding boxes"/>
+<img src="./media/BoundingBoxes.png" alt="Bounding boxes"/>
 
 The bounding boxes will update whenever the image changes.
 
